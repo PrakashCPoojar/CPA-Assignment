@@ -1,3 +1,7 @@
+- Since the project is created with a name sample.
+- We need to change the name in required places or create a folder of the "sample" and take pull
+- Change the APPID and CLIENTID
+
 # sample
 
 A new Flutter project.
