@@ -1,20 +1,15 @@
 - Since the project is created with a name sample.
-- We need to change the name in required places or create a folder of the "sample" and take pull
-- Change the APPID and CLIENTID
+- In the D Drive create folder with name "YOUR_PROJECT_NAME"
+- In the command prompt "cd YOUR_PROJECT_NAME "
+- Take pull from https://github.com/PrakashCPoojar/CPA-Assignment // Since git directory name is CPA-Assignment you will get the "CPA-Assignment" folder
+- cd CPA-Assignmen
+- Open the CPA-Assignment project in your VS Code (IDE)
+- Check the dependencies section
+- RUN the: flutter pub get // To install the included dependencies
+- RUN the project: flutter run
+- It will ask you to select the platform to run the project
+-   If you are using the android studio emulator, chrome browser, Edge browser and Windows
+-   Select the based on your preference to run the project
+- It will take some time to spinup the engine and Machine will popups with app
+  
 
-# sample
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
