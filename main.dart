@@ -15,7 +15,6 @@ void main() async {
   runApp(MaterialApp(
     home: Home(),
   ));
-  
 }
 
 class Home extends StatefulWidget {
@@ -26,6 +25,55 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todoController = TextEditingController();
   Map<String, bool> editModeMap = {};
+  ScrollController _scrollController = ScrollController();
+  List<ParseObject> todoList = [];
+  int _currentPage = 5;
+  int _pageSize = 5; // Adjust the page size as needed
+  bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+    _loadTodo();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (!_loading && _scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      // Reached the end of the list, load more data
+      _loadTodo();
+    }
+  }
+
+  Future<void> _loadTodo() async {
+    setState(() {
+      _loading = true;
+    });
+
+    QueryBuilder<ParseObject> queryTodo = QueryBuilder<ParseObject>(ParseObject('Todo'))
+      ..setAmountToSkip(_currentPage * _pageSize)
+      ..setLimit(_pageSize);
+
+    final ParseResponse apiResponse = await queryTodo.query();
+
+    if (apiResponse.success && apiResponse.results != null) {
+      setState(() {
+        todoList.addAll(apiResponse.results as List<ParseObject>);
+        _currentPage++;
+        _loading = false;
+      });
+    } else {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +282,7 @@ class _HomeState extends State<Home> {
         SnackBar(
           content: Text("Empty title"),
           duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
         ),
       );
       return;
